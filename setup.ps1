@@ -1,0 +1,5 @@
+& ".\setup-files\install-winget.ps1"
+& ".\setup-files\install-microsoft-programs.ps1"
+& ".\setup-files\install-normal-programs.ps1"
+& ".\setup-files\install-niche-programs.ps1"
+& ".\setup-files\setup-glaze.ps1"
