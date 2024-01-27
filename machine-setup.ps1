@@ -5,3 +5,4 @@ winget install 9PGCV4V3BK4W
 winget install glzr-io.glazewm
 winget install JanDeDobbeleer.OhMyPosh -s winget
 winget install GitHub.GitHubDesktop GitHub.cli
+winget install JetBrains.Toolbox
