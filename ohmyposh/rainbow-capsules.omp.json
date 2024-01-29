@@ -132,6 +132,7 @@
 					"background": "p:colorful-blue",
 					"template": "{{.Weather}} ({{.Temperature}}{{.UnitIcon}})",
 					"properties": {
+                        "api_key": "",
 						"latitude": 43.0722,
 						"longitude": -89.4008,
 						"units": "imperial",
@@ -184,15 +185,51 @@
 			"type": "rprompt",
 			"overflow": "break",
 			"segments": [
+                {
+                    "type": "python",
+                    "style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4 ",
+					"foreground": "p:pastel-yellow",
+					"background": "p:grey",
+                    "properties": {
+                        "display_mode": "files"
+                    },
+                    "template": "\ue73c {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
+                },
+                {
+                    "type": "git",
+                    "style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4 ",
+					"foreground": "p:pastel-orange",
+					"background": "p:grey",
+                    "properties": {
+                        "fetch_status": true
+                    }
+                },
 				{
 					"type": "spotify",
 					"style": "diamond",
 					"leading_diamond": "\ue0b6",
 					"trailing_diamond": "\ue0b4",
-					"foreground": "p:bubble-text-light",
+					"foreground": "p:pastel-red",
 					"background": "p:grey",
-					"template": " {{ .Track }} -- {{ .Artist }}"
-				}
+                    "properties": {
+                        "playing_icon": "\udb80\udf88",
+                        "stopped_icon": "\udb80\udf8a"
+                    },
+                    "template": "{{ .Icon }} {{ .Track }} -- {{ .Artist }}"
+                },
+                {
+					"type": "text",
+					"style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4",
+					"foreground": "p:pastel-red",
+					"background": "p:grey",
+                    "template": "{{ if ne .Segments.Spotify.Status \"playing\" }}\udb80\udf8a It's quiet...{{ else }}{{ end }}"
+                }
 			]
 		}
 	],
