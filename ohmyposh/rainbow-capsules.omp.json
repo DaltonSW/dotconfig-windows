@@ -1,0 +1,204 @@
+{
+	"$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+	"version": 2,
+    "final_space": true,
+	"console_title_template": "{{.Folder}}{{if .Root}} :: root{{end}} :: {{.Shell}}",
+	"palette": {
+		"white": "#ffffff",
+        "grey": "#424242",
+		"black": "#262B44",
+		"red": "#D81E5B",
+		"orange": "#F07623",
+		"yellow": "#F3AE35",
+		"green": "#1fa040",
+		"blue": "#4B95E9",
+		"indigo": "#FFFFFF",
+		"purple": "#FFFFFF",
+
+		"colorful-red": "#FA6977",
+		"colorful-orange": "#eba947",
+		"colorful-yellow": "#f0e660",
+		"colorful-green": "#97f163",
+		"colorful-blue": "#87D5F8",
+		"colorful-indigo": "#7171db",
+		"colorful-purple": "#b156e2",
+		"colorful-pink": "#f091ff",
+
+		"pastel-red": "#ffadad",
+		"pastel-orange": "#ffd6a5",
+		"pastel-yellow": "#fdffb6",
+		"pastel-green": "#caffbf",
+		"pastel-blue": "#9bf6ff",
+		"pastel-indigo": "#a0c4ff",
+		"pastel-purple": "#bdb2ff",
+		"pastel-pink": "#ffc6ff",
+
+		"temp-10": "#B0E0E6",
+		"temp-20": "#AAE7D2",
+		"temp-30": "#A4EEBF",
+		"temp-40": "#9EF4AC",
+		"temp-50": "#98FB98",
+		"temp-60": "#7ddb46",
+		"temp-70": "#e9bc40",
+		"temp-80": "#f57f31",
+		"temp-90": "#e43c1e",
+		"temp-100": "#f80901",
+
+		"prompt": "p:orange",
+		"bubble-text-dark": "p:black",
+		"bubble-text-light": "p:white",
+		"user_fore": "p:white",
+		"user_back": "p:blue",
+		"full_path_fore": "p:white",
+		"full_path_back": "p:blue",
+		"cur_path_fore": "p:white",
+		"cur_path_back": "p:blue"
+	},
+	"blocks": [
+		{
+			"type": "prompt",
+			"alignment": "left",
+			"segments": [
+				{
+					"type": "time",
+                    "alias": "Clock",
+					"style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4 ",
+					"background": "p:colorful-red",
+					"foreground": "p:bubble-text-dark",
+					"template": "\ue641 {{ .CurrentDate | date .Format }}",
+					"properties": {
+						"time_format": "3:04PM"
+					}
+				},
+				{
+					"type": "session",
+					"style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4 ",
+					"background": "p:colorful-orange",
+					"foreground": "p:bubble-text-dark",
+					"template": "{{ .UserName }}"
+				},
+				{
+					"type": "path",
+					"style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4 ",
+					"background": "p:colorful-yellow",
+					"foreground": "p:bubble-text-dark",
+					"properties": {
+						"style": "agnoster_short",
+                        "max_depth": 3
+					}
+				}
+			]
+		},
+		{
+			"type": "prompt",
+			"alignment": "right",
+			"overflow": "break",
+			"segments": [
+				{
+					"type": "executiontime",
+                    "alias": "Exec",
+					"style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4 ",
+					"background": "transparent",
+					"foreground": "transparent",
+					"properties": {
+						"threshold": 0
+					},
+					"template": "\udb81\udd1f {{ .FormattedMs }}"
+				},
+				{
+					"type": "sysinfo",
+                    "alias": "Sys",
+					"style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4 ",
+					"background": "p:colorful-green",
+					"foreground": "p:bubble-text-dark",
+					"template": "\ue266 {{ (round (divf .PhysicalAvailableMemory 1073741824.0) 1) }}/{{ (round (divf .PhysicalTotalMemory 1073741824.0) 1) }}GB ({{ .PhysicalPercentUsed }}%)"
+				},
+                {
+					"type": "owm",
+					"style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4 ",
+					"foreground": "p:bubble-text-dark",
+					"background": "p:colorful-blue",
+					"template": "{{.Weather}} ({{.Temperature}}{{.UnitIcon}})",
+					"properties": {
+						"latitude": 43.0722,
+						"longitude": -89.4008,
+						"units": "imperial",
+						"http_timeout": 500,
+						"cache_timeout": 10
+					}
+				},
+				{
+					"type": "time",
+                    "alias": "Calendar",
+					"style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4 ",
+					"background": "p:colorful-indigo",
+					"foreground": "p:bubble-text-dark",
+					"properties": {
+						"time_format": "\uf073  (Sunday) January 2, 2006"
+					},
+					"template": "{{.CurrentDate | date .Format}}"
+				},
+				{
+					"type": "connection",
+					"style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4",
+					"background": "p:colorful-purple",
+					"foreground": "p:bubble-text-dark",
+					"template": "{{ if eq .Type \"wifi\"}}\uf1eb \uf00c {{ else if eq .Type \"ethernet\"}}\udb80\ude00 \uf00c {{ end }}"
+				}
+			]
+		},
+		{
+			"type": "prompt",
+			"alignment": "left",
+			"newline": true,
+			"segments": [
+				{
+					"type": "root",
+					"style": "plain"
+				},
+				{
+					"type": "text",
+					"style": "plain",
+					"foreground": "p:prompt",
+					"template": ">> "
+				}
+			]
+		},
+		{
+			"type": "rprompt",
+			"overflow": "break",
+			"segments": [
+				{
+					"type": "spotify",
+					"style": "diamond",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b4",
+					"foreground": "p:bubble-text-light",
+					"background": "p:grey",
+					"template": " {{ .Track }} -- {{ .Artist }}"
+				}
+			]
+		}
+	],
+    "transient_prompt": {
+		"foreground": "p:pastel-yellow",
+		"background": "p:grey",
+		"template": "<p:grey,transparent>\ue0b6</> {{.Segments.Clock.CurrentDate | date \"03:04:05.00\"}}  \udb81\udd1f {{.Segments.Exec.FormattedMs}} <p:grey,transparent>\ue0b4 </>"
+	}
+}
