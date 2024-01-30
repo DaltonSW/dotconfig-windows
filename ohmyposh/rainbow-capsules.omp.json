@@ -106,12 +106,12 @@
 					"style": "diamond",
 					"leading_diamond": "\ue0b6",
 					"trailing_diamond": "\ue0b4 ",
-					"background": "transparent",
-					"foreground": "transparent",
+					"background": "p:colorful-green",
+					"foreground": "p:bubble-text-dark",
 					"properties": {
 						"threshold": 0
 					},
-					"template": "\udb81\udd1f {{ .FormattedMs }}"
+					"template": "\udb85\udfbd {{ .FormattedMs }}"
 				},
 				{
 					"type": "sysinfo",
@@ -119,9 +119,9 @@
 					"style": "diamond",
 					"leading_diamond": "\ue0b6",
 					"trailing_diamond": "\ue0b4 ",
-					"background": "p:colorful-green",
+					"background": "p:colorful-blue",
 					"foreground": "p:bubble-text-dark",
-					"template": "\ue266 {{ (round (divf .PhysicalAvailableMemory 1073741824.0) 1) }}/{{ (round (divf .PhysicalTotalMemory 1073741824.0) 1) }}GB ({{ .PhysicalPercentUsed }}%)"
+					"template": "\ue266 {{ .PhysicalPercentUsed }}% used"
 				},
                 {
 					"type": "owm",
@@ -129,7 +129,7 @@
 					"leading_diamond": "\ue0b6",
 					"trailing_diamond": "\ue0b4 ",
 					"foreground": "p:bubble-text-dark",
-					"background": "p:colorful-blue",
+					"background": "p:colorful-indigo",
 					"template": "{{.Weather}} ({{.Temperature}}{{.UnitIcon}})",
 					"properties": {
                         "api_key": "",
@@ -146,21 +146,12 @@
 					"style": "diamond",
 					"leading_diamond": "\ue0b6",
 					"trailing_diamond": "\ue0b4 ",
-					"background": "p:colorful-indigo",
+					"background": "p:colorful-purple",
 					"foreground": "p:bubble-text-dark",
 					"properties": {
 						"time_format": "\uf073  (Sunday) January 2, 2006"
 					},
 					"template": "{{.CurrentDate | date .Format}}"
-				},
-				{
-					"type": "connection",
-					"style": "diamond",
-					"leading_diamond": "\ue0b6",
-					"trailing_diamond": "\ue0b4",
-					"background": "p:colorful-purple",
-					"foreground": "p:bubble-text-dark",
-					"template": "{{ if eq .Type \"wifi\"}}\uf1eb \uf00c {{ else if eq .Type \"ethernet\"}}\udb80\ude00 \uf00c {{ end }}"
 				}
 			]
 		},
@@ -236,6 +227,6 @@
     "transient_prompt": {
 		"foreground": "p:pastel-yellow",
 		"background": "p:grey",
-		"template": "<p:grey,transparent>\ue0b6</> {{.Segments.Clock.CurrentDate | date \"03:04:05.00\"}}  \udb81\udd1f {{.Segments.Exec.FormattedMs}} <p:grey,transparent>\ue0b4 </>"
+		"template": "<p:grey,transparent>\ue0b6</> {{.Segments.Clock.CurrentDate | date \"03:04:05.00\"}} <p:grey,transparent>\ue0b4 </>"
 	}
 }
