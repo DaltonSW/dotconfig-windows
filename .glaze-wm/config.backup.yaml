@@ -13,7 +13,7 @@ palette:
   # pink: &pink "#ff79c6"
 
   # My Dracula Fork
-  text: &text "#fff4e0"
+  text: &text "#fff1de"
   grey: &grey "#44475a"
   background: &background "#1f1d26"
   pale-blue: &pale-blue "#98afff"
@@ -26,25 +26,40 @@ palette:
   pink: &pink "#ff5397"
   magenta: &magenta "#ff3f90"
 
-  inactive: &inactive "#98afff"
-  active: &active  "#0cfde0"
+  colorful-red: &colorful-red "#FA6977"
+  colorful-orange: &colorful-orange "#eba947"
+  colorful-yellow: &colorful-yellow "#f0e660"
+  colorful-green: &colorful-green "#97f163"
+  colorful-blue: &colorful-blue "#87D5F8"
+  colorful-indigo: &colorful-indigo "#7171db"
+  colorful-purple: &colorful-purple "#b156e2"
+  colorful-pink: &colorful-pink "#f091ff"
 
-  bar-border: &bar-border "#7B7296"
-  gradient2: &gradient2 "#FFEBC7"
-  gradient3: &gradient3 "#FFE2AD"
-  gradient4: &gradient4 "#ffd487"
-  gradient5: &gradient5 "#ffbb87"
+  pastel-red: &pastel-red "#ffadad"
+  pastel-orange: &pastel-orange "#ffd6a5"
+  pastel-yellow: &pastel-yellow "#fdffb6"
+  pastel-green: &pastel-green "#caffbf"
+  pastel-blue: &pastel-blue "#9bf6ff"
+  pastel-indigo: &pastel-indigo "#a0c4ff"
+  pastel-purple: &pastel-purple "#bdb2ff"
+  pastel-pink: &pastel-pink "#ffc6ff"
 
-  gradient6: &gradient6 "#FF807E"
-  gradient7: &gradient7 "#fe5e78"
-  gradient8: &gradient8 "#ff217c"
-  gradient9: &gradient9 "#B40D65"
+  temp-10: &temp-10 "#B0E0E6"
+  temp-20: &temp-20 "#AAE7D2"
+  temp-30: &temp-30 "#A4EEBF"
+  temp-40: &temp-40 "#9EF4AC"
+  temp-50: &temp-50 "#98FB98"
+  temp-60: &temp-60 "#7ddb46"
+  temp-70: &temp-70 "#e9bc40"
+  temp-80: &temp-80 "#f57f31"
+  temp-90: &temp-90 "#e43c1e"
+  temp-100: &temp-100 "#f80901"
 
 capsule: &capsule
   foreground: *text
   margin: 0 6
   padding: 0 8
-  border_width: 1 0 2 0
+  border_width: 3 0
   border_radius: 4
 
 general:
@@ -73,20 +88,25 @@ general:
   window_animations: "false"
 
 gaps:
-  inner_gap: "5px" # Between adjacent windows
-  outer_gap: &outer_gap "6px" # Between windws and screen edge
+  # Gap between adjacent windows.
+  inner_gap: "5px"
 
+  # Gap between windows and the screen edge.
+  outer_gap: &outer_gap "6px"
+
+# Highlight active/inactive windows with a colored border.
+# ** Exclusive to Windows 11 due to API limitations.
 focus_borders:
   active:
     enabled: true
-    color: *active
+    color: *yellow
 
   inactive:
     enabled: true
-    color: *inactive
+    color: *pale-blue
 
 bar:
-  height: "32px"
+  height: "37px"
   position: "top"
   opacity: 1.0
   background: *background
@@ -94,42 +114,46 @@ bar:
   font_family: "FiraCode Nerd Font"
   font_size: "14px"
   padding: "2px 2px"
-  offset_x: *outer_gap
-  offset_y: *outer_gap
+  offset_x: "2" # *outer_gap
+  offset_y: "-3" # *outer_gap
   border_radius: "7"
+  border_width: "1 1 2 1"
+  border_color: *magenta
   components_left:
     - type: "workspaces"
-      default_workspace_background: "transparent"
-      default_workspace_border_color: *inactive
-      default_workspace_border_width: 1 0 2 0
-      default_workspace_border_radius: 8
-
       focused_workspace_background: "#ffffff33"
-      focused_workspace_border_color: *active
-      focused_workspace_border_width: 1 0 2 0
-      focused_workspace_border_radius: 8
-
       displayed_workspace_background: "#00000033"
-      displayed_workspace_border_color: *inactive
-      displayed_workspace_border_width: 1 0 2 0
-      displayed_workspace_border_radius: 8
-  components_right:
+      default_workspace_background: "transparent"
+      <<: *capsule
+      border_color: *pink
     - type: "cpu"
       label: " {percent_usage}%"
       <<: *capsule
-      border_color: *gradient4
+      border_color: *purple
     - type: "memory"
       label: " {percent_usage}%"
       <<: *capsule
-      border_color: *gradient5
+      border_color: *yellow
+  components_center:
+    - type: "clock"
+      # https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
+      time_formatting: " hh:mm tt"
+      <<: *capsule
+      border_color: *red
+    - type: "clock"
+      # https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
+      time_formatting: "󰃭 MMM dd (dddd)"
+      <<: *capsule
+      border_color: *orange
+  components_right:
     - type: "music"
       label_not_playing: "< Nothing Playing >"
       label_paused: "󰝛 {song_title} - {artist_name}"
       label_playing: "󰝚 {song_title} - {artist_name}"
-      max_title_length: 15
-      max_artist_length: 15
+      max_title_length: 20
+      max_artist_length: 20
       <<: *capsule
-      border_color: *gradient6
+      border_color: *green
     - type: "weather"
       latitude: 43.03708994156409
       longitude: -89.4503560109503
@@ -145,15 +169,7 @@ bar:
       label_thunderstorm: "⚡ {temperature_fahrenheit}°F"
       label_cloud: "☁️ {temperature_fahrenheit}°F"
       <<: *capsule
-      border_color: *gradient7
-    - type: "clock"
-      time_formatting: " hh:mm tt"
-      <<: *capsule
-      border_color: *gradient8
-    - type: "clock"
-      time_formatting: "󰃭 MMM dd (ddd)"
-      <<: *capsule
-      border_color: *gradient9
+      border_color: *blue
 
 window_rules:
   # Task Manager requires admin privileges to manage and should be ignored unless running
@@ -178,7 +194,7 @@ window_rules:
   - command: "move to workspace 3"
     match_process_name: "Discord|Telegram"
 
-  - commands: ["move to workspace 4", "resize borders 0px -7px -7px -7px"]
+  - command: "move to workspace 4"
     match_process_name: "/steam/"
 
   - command: "move to workspace 5"
@@ -190,7 +206,7 @@ window_rules:
 
   # Games
   - command: "ignore"
-    match_process_name: "/bg3|Lari|Risk of Rain|BloonsTD6|yuzu/"
+    match_process_name: "/bg3|Lari|Risk of Rain|BloonsTD6/"
 
 binding_modes:
   - name: "resize"
@@ -347,30 +363,30 @@ keybindings:
 
 workspaces:
   - name: "1"
-    display_name: " 1"
+    display_name: "Main"
     bind_to_monitor: 1
     keep_alive: true
   - name: "2"
-    display_name: " 2"
+    display_name: "Browser"
     keep_alive: true
   - name: "3"
-    display_name: "󰭹 3"
+    display_name: "Chat"
     keep_alive: true
   - name: "4"
-    display_name: " 4"
+    display_name: "Games"
     bind_to_monitor: 1
     keep_alive: true
   - name: "5"
-    display_name: " 5"
+    display_name: "Files"
     bind_to_monitor: 3
     keep_alive: true
   - name: "6"
-    display_name: " 6"
+    display_name: "Misc"
     keep_alive: true
   - name: "7"
   - name: "8"
   - name: "9"
   - name: "0"
-    display_name: " 0"
+    display_name: "Videos"
     bind_to_monitor: 2
     keep_alive: true
