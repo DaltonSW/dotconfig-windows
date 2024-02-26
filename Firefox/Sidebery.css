@@ -1,0 +1,10 @@
+/* Open Sidebery's settings, go to "Styles Editor" and paste this in */
+#root.root {--tabs-border-radius: 10px;}
+#root.root {--tabs-margin: 4px;}
+#root.root {--tabs-activated-bg: #44475a;}
+
+#root.root {--frame-bg: #191b1c;}
+#root.root {--toolbar-bg: #191b1c;}
+
+#root.root {--tabs-font: 1rem Monospace;}
+#root.root {--ctx-menu-font: 1rem Monospace;}

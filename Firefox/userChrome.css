@@ -1,0 +1,569 @@
+/* OVERALL STYLING */
+
+:root {
+	--dracula-dark-grey: #282a36;
+	--dracula-light-grey: #44475a;
+	--dracula-white: #f8f8f2;
+	--dracula-dark-blue: #6272a4;
+	--dracula-cyan: #8be9fd;
+	--dracula-green: #50fa7b;
+	--dracula-orange: #ffb86c;
+	--dracula-pink: #ff79c6;
+	--dracula-purple: #bd93f9;
+	--dracula-red: #ff5555;
+	--dracula-yellow: #f1fa8c;
+
+	--normal-border: var(--dracula-light-grey);
+	--sidebar-border-hover: var(--dracula-pink);
+	--main-border-hover: var(--dracula-cyan);
+	--findbar-border-hover: var(--dracula-yellow);
+	--nav-toolbox-border-hover: var(--dracula-purple);
+	
+	--inner-background: #191b1c;
+
+	--minimize-color: var(--dracula-yellow);
+	--maximize-color: var(--dracula-green);
+	--close-color: var(--dracula-red);
+	
+	--tab-border-radius: 3px !important;
+	--NavbarWidth: 2;
+	--TabsHeight: 36;
+	--TabsBorder: 8;
+	--NavbarHeightSmall: calc(var(--TabsHeight) + var(--TabsBorder));
+	
+	--toolbar-field-focus-border-color: transparent !important;
+}
+
+* {
+	font-family: monospace;
+}
+
+body {
+	background-color: var(--dracula-dark-grey) !important;
+}
+
+#TabsToolbar .titlebar-button {
+	border-radius: 5px !important;
+  appearance: none !important;
+	margin: 6px 6px 6px 0px !important;
+	padding: 7px 9px !important;
+}
+
+#TabsToolbar .titlebar-min {
+	/* border: 1px solid var(--minimize-color) !important; */
+	color: var(--minimize-color) !important;
+}
+
+#TabsToolbar .titlebar-max,
+#TabsToolbar .titlebar-restore{
+	/* border: 1px solid var(--maximize-color) !important; */
+	color: var(--maximize-color) !important;
+}
+
+#TabsToolbar .titlebar-close {
+	/* border: 1px solid var(--close-color) !important; */
+	stroke: var(--close-color) !important;
+	color: var(--close-color) !important;
+}
+
+#TabsToolbar .titlebar-min:hover {
+	color: var(--inner-background) !important;
+	background-color: var(--minimize-color) !important;
+}
+
+#TabsToolbar .titlebar-max:hover,
+#TabsToolbar .titlebar-restore:hover{
+	color: var(--inner-background) !important;
+	background-color: var(--maximize-color) !important;
+}
+
+#TabsToolbar .titlebar-close:hover {
+	color: var(--inner-background) !important;
+	stroke: var(--inner-background) !important;
+	background-color: var(--close-color) !important;
+}
+
+#nav-bar #PanelUI-button {
+  -moz-box-ordinal-group: 0 !important;
+		order: 0 !important;
+}
+
+toolbar:not([customizing]) > #nav-bar-overflow-button {
+  -moz-box-ordinal-group: 1 !important;
+	order: 1 !important;
+}
+
+toolbar:not([customizing]) > #nav-bar-customization-target {
+  -moz-box-ordinal-group: 2 !important;
+		order: 2 !important;
+}
+
+#PanelUI-menu-button {
+	margin-left: 4px !important;
+	padding-right: 0px !important;
+}
+
+/* Handle animations for selecting the box and the box returning to neutral state */
+#main-window #urlbar {
+    z-index: 9999 !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transition: width 0.3s ease, left 0.3s ease, margin-top 0.3s ease, margin-left 0.3s ease, margin-right 0.3s ease;
+}
+
+#main-window #urlbar[breakout][breakout-extend] {
+    opacity: 0.90 !important;
+    width: 100% !important;
+    left: 0;
+    right: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 30vh !important;
+	  border-radius: 19px !important;
+	  border: 3px solid var(--dracula-red);
+    transition: width 0.3s ease, left 0.3s ease, margin-top 0.3s ease, margin-left 0.3s ease, margin-right 0.3s ease;
+}
+
+
+
+
+/* MAIN CONTENT */
+
+#main-window:not([sizemode="fullscreen"]) #appcontent browser {
+	border-radius: 10px !important;
+	margin: 5px 5px 5px 0px !important;
+	border: 3px solid var(--normal-border);
+	transition: border 0.3s ease;
+	clip-path: circle(80%) !important;
+}
+
+#main-window:not([sizemode="fullscreen"]) #appcontent browser:hover {
+	border: 3px solid var(--main-border-hover);
+}
+
+/* Makes the differently colored area around the URL bar transparent */
+#PersonalToolbar,
+#nav-bar {
+	background: transparent !important;
+}
+
+/* TAB / URL BAR */
+
+#titlebar {
+	background-color: transparent !important;
+}
+
+#navigator-toolbox {
+	border-radius: 10px;
+	margin: 5px 5px 0px 5px !important;
+	background-color: var(--inner-background) !important;
+	border: 3px solid var(--normal-border) !important;
+	transition: border 0.3s ease !important;
+}
+
+#navigator-toolbox:hover {
+	border: 3px solid var(--nav-toolbox-border-hover) !important;
+}
+
+.tab-background {
+	background-color: transparent !important;
+}
+
+/* Adjusts bar using whatever min-width stupid stuff */
+#urlbar-container {
+	min-width: 0px !important;
+	flex: auto !important;
+}
+
+@media screen and (max-width: 100px) {
+	#TabsToolbar {
+		margin-right: 0 !important;
+	}
+	#nav-bar {
+		margin-left: 0 !important;
+	}
+}
+
+/* Hides all tabs but the selected tab */
+tab:not([selected="true"]),
+[part="overflow-start-indicator"],
+[part="overflow-end-indicator"],
+#scrollbutton-up,
+#scrollbutton-down,
+#TabsToolbar .titlebar-spacer,
+.tabbrowser-tab[selected="true"] .tab-text,
+.tabbrowser-tab[selected="true"] .tab-close-button,
+.tab-line,
+.tab-throbber {
+	display: none !important;
+}
+
+/* Shrinks the selected tab to be a 37x37px square */
+.tabbrowser-tab[selected="true"] {
+	min-width: 37px !important;
+	max-width: 37px !important;
+}
+
+tab,
+.tabbrowser-tab {
+	padding-left: 0 !important;
+	margin-left: 0 !important;
+}
+
+.tab-background {
+	outline: none !important;
+	box-shadow: none !important;
+	color: transparent !important;
+}
+
+/* Changes the size of the tab icon */
+.tab-icon-image {
+	height: 32px !important;
+	width: 32px !important;
+	border-radius: 10px !important;
+}
+
+.tab-icon-image {
+	content: url("dark.png") !important;
+}
+
+
+#alltabs-button,
+#tabs-newtab-button {
+	display: none !important;
+}
+
+/*****************************************/
+/* URL BAR                               */
+/*****************************************/
+
+/* Shrink and center URL bar */
+#nav-bar {
+	margin-right: 115px !important;
+	display: flex;
+	justify-content: center;
+	margin-top: calc(
+		var(--TabsHeight) * -1px - var(--TabsBorder) * 1px
+	) !important;
+	height: calc((var(--TabsHeight) * 1px + var(--TabsBorder) * 1px) + 0px);
+}
+
+#urlbar-container {
+	flex: 1;
+	max-width: 1000px;
+	min-width: 200px;
+	margin: auto !important;
+	margin-bottom: 6px !important;
+}
+
+/* Round the corners of the bar */
+#urlbar-background,
+#urlbar-input-container {
+	--toolbarbutton-border-radius: calc(var(--urlbar-min-height) / 2);
+}
+
+#urlbar-input-container {
+	--urlbar-icon-border-radius: calc(var(--toolbarbutton-border-radius) - 1px);
+}
+
+/* Center the text in the bar itself */
+#urlbar:not([focused]) #urlbar-input {
+	text-align: center !important;
+}
+
+#urlbar:not([breakout][breakout-extend]) #urlbar-input {
+	text-align: center !important;
+}
+
+#urlbar-background {
+	background-color: var(--dracula-dark-grey) !important;
+}
+
+#urlbar-results > *[selected=""] {
+	background-color: #424242 !important;
+}
+
+#nav-bar:not([customizing="true"]):not(.searchButton)
+	> #nav-bar-customization-target
+	> #urlbar-container:not(:hover)
+	> #urlbar:not([focused])
+	> #urlbar-input-container
+	> #page-action-buttons
+	.urlbar-page-action {
+	opacity: 0;
+	transition-delay: 500ms;
+}
+
+#nav-bar:not([customizing="true"]):not(.searchButton)
+	> #nav-bar-customization-target
+	> #urlbar-container:not(:hover)
+	> #urlbar:not([focused])
+	> #urlbar-input-container
+	> #identity-box
+	> #identity-permission-box:not([open]) {
+	opacity: 0;
+	transition-delay: 500ms;
+}
+
+#page-action-buttons .urlbar-page-action,
+#identity-permission-box,
+#notification-popup-box .notification-anchor-icon {
+	transition: opacity 0.2s ease;
+}
+
+#urlbar #identity-icon-box,
+#urlbar #identity-permission-box {
+	opacity: 0 !important;
+	margin-inline-start: calc(-16px - 2 * var(--urlbar-icon-padding));
+	transition: margin-inline-start 100ms linear, opacity 200ms linear;
+}
+
+#urlbar #identity-box.notSecureText #identity-icon-box {
+	margin-inline-start: initial !important;
+	opacity: 1 !important;
+	color: #e36f6f !important;
+}
+
+#urlbar #identity-box.extensionPage #identity-icon-box {
+	margin-inline-start: initial !important;
+	opacity: 1 !important;
+}
+
+#identity-box:hover #identity-icon-box,
+#identity-box:hover #identity-permission-box,
+#identity-box #identity-permission-box[open="true"] {
+	opacity: 1 !important;
+	margin-inline-start: initial !important;
+}
+
+#urlbar-input-container .urlbar-input-box {
+	padding-inline-start: 2px !important;
+}
+
+#identity-box:hover ~ .urlbar-input-box > #urlbar-input {
+	mask-image: linear-gradient(to right, transparent, black 3ch) !important;
+}
+
+#page-action-buttons {
+	padding-inline-start: 8px;
+}
+
+#page-action-buttons .urlbar-page-action {
+	margin-inline-end: calc(-16px - 2 * var(--urlbar-icon-padding));
+	opacity: 0;
+	transition: margin-inline-end 100ms linear, opacity 200ms linear;
+}
+
+#page-action-buttons:hover > .urlbar-page-action,
+.urlbar-page-action[open],
+.urlbar-page-action[open] ~ .urlbar-page-action {
+	opacity: 1;
+	margin-inline-end: 0px !important;
+}
+
+#identity-box.chromeUI #identity-icon-box {
+	opacity: 1 !important;
+	margin-inline-start: initial;
+}
+
+#identity-box.chromeUI::after,
+#identity-box.chromeUI:hover::after {
+	opacity: 0 !important;
+}
+
+#page-action-buttons:not(:hover)
+	#translations-button[translationsactive="true"]:not([open]) {
+	visibility: collapse !important;
+}
+
+#identity-box[pageproxystate="valid"].notSecureText > .identity-box-button,
+#identity-box[pageproxystate="valid"].extensionPage > .identity-box-button,
+#identity-box[pageproxystate="valid"].chromeUI > .identity-box-button,
+#urlbar-label-box,
+#urlbar-zoom-button {
+	background-color: var(--firefoxcss-item-bg-color) !important;
+}
+
+/* Zoom button color when hovered */
+#urlbar-zoom-button:hover {
+	background-color: var(--firefoxcss-urlbar-zoom-button) !important;
+}
+
+#identity-box::after,
+#page-action-buttons::before {
+	position: relative;
+	content: "•••";
+	pointer-events: none;
+	transition: opacity 100ms ease;
+	align-self: center;
+	font-size: 0.75em;
+}
+
+/* Make new dots mostly transparent */
+#identity-box::after,
+#page-action-buttons::before {
+	opacity: 0.2;
+}
+
+/* Rotate left set of dots to be vertical */
+#identity-box::after {
+	transform: rotate(90deg);
+	left: 4px;
+}
+
+/* Rotate right set of dots to be vertical */
+#page-action-buttons::before {
+	transform: rotate(-90deg);
+	right: 4px;
+}
+
+#identity-box:hover::after,
+#page-action-buttons:hover::before {
+	opacity: 0.2 !important;
+	transition: opacity 50ms ease;
+	pointer-events: none;
+}
+
+#identity-box[pageproxystate="invalid"]::after,
+#urlbar-input-container[pageproxystate="invalid"]
+	> #page-action-buttons::before {
+	opacity: 0 !important;
+	transition: opacity 50ms ease;
+}
+
+/* Round the corners of the highlighting present when hovering over URL bar icons */
+#urlbar-input-container #identity-box > .identity-box-button,
+#tracking-protection-icon-container,
+#urlbar-go-button,
+#page-action-buttons .urlbar-page-action,
+#notification-popup-box {
+	border-radius: 8px !important;
+}
+
+/* Remove the Tracking Protection icon */
+#urlbar-go-button,
+#tracking-protection-icon-container {
+	display: none !important;
+}
+
+/*****************************************/
+/* EXTENSIONS MENU                       */
+/*****************************************/
+
+/* Change "Manage Extensions" row at bottom of extensions menu to "• • •" */
+#unified-extensions-view
+	#unified-extensions-manage-extensions
+	.toolbarbutton-text::before {
+	content: "• • •";
+	font-size: 15px;
+	visibility: visible !important;
+	display: block;
+	text-align: center;
+}
+
+/* Shrinks width of box to only take necessary width */
+#unified-extensions-panel #unified-extensions-view {
+	width: 100% !important;
+}
+
+/* Shrink icon size, and change number of extensions per row */
+#unified-extensions-view {
+	--uei-icon-size: 22px;
+	--firefoxcss-number-of-extensions-in-a-row: 4;
+}
+
+/* Remove text and buttons related to extensions in menu */
+#unified-extensions-view .unified-extensions-item-menu-button.subviewbutton,
+#unified-extensions-view
+	.unified-extensions-item-action-button
+	.unified-extensions-item-contents {
+	display: none !important;
+}
+
+/* Add padding between box edges and extension icons */
+#unified-extensions-view .panel-subview-body {
+	padding: 10px !important;
+}
+
+#unified-extensions-view .unified-extensions-item .unified-extensions-item-icon,
+#unified-extensions-view .unified-extensions-item .toolbarbutton-badge-stack {
+	margin-inline-end: 0px !important;
+}
+
+/* Make the extension icons actually conform to a grid */
+#unified-extensions-view #overflowed-extensions-list,
+#unified-extensions-view #unified-extensions-area,
+#unified-extensions-view .unified-extensions-list {
+	display: grid !important;
+	grid-template-columns: repeat(
+		var(--firefoxcss-number-of-extensions-in-a-row),
+		auto
+	);
+	justify-items: left !important;
+	align-items: left !important;
+}
+
+/****************/
+/* CTRL + F BAR */
+
+.browserContainer > findbar {
+	border-radius: 10px !important;
+	margin: 0px 5px 5px 0px !important;
+	border: 3px solid var(--normal-border) !important;
+	transition: border 0.3s ease !important;
+}
+
+.browserContainer > findbar:hover {
+	border: 3px solid var(--findbar-border-hover) !important;
+}
+
+.browserContainer > findbar .findbar-textbox {
+	border-radius: 10px !important;
+	text-align: center !important;
+	accent-color: transparent !important;
+	border: 2px solid var(--findbar-border-hover) !important;
+}
+
+.browserContainer > findbar .findbar-textbox:focus {
+	accent-color: transparent !important;
+	border: 2px solid var(--findbar-border-hover) !important;
+}
+
+/***********/
+/* SIDEBAR */
+
+#sidebar-header,
+#sidebar-splitter,
+.devtools-side-splitter,
+.devtools-horizontal-splitter {
+	display: none !important;
+}
+
+/* Actually adds the margin and border and whatever */
+#sidebar-box #sidebar,
+#sidebar-box #webextpanels-window {
+	border-radius: 10px !important;
+	margin: 5px 5px 5px 5px !important;
+	border: 3px solid var(--normal-border);
+	transition: border 0.3s ease;
+}
+
+#sidebar {
+	background-color: var(--inner-background) !important;
+}
+
+/* Changes the color of the border on hover */
+#sidebar-box #sidebar:hover,
+#sidebar-box #webextpanels-:hover {
+	border: 3px solid var(--sidebar-border-hover);
+}
+
+/*************/
+/* DEV TOOLS */
+
+.devtools-toolbox-side-iframe:hover,
+.devtools-toolbox-bottom-iframe:hover {
+	border-color: var(--dracula-green) !important;
+}
