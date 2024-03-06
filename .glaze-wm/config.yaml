@@ -192,18 +192,21 @@ window_rules:
   - command: "ignore"
     match_process_name: "/bg3|Lari|Risk of Rain|BloonsTD6|yuzu/"
 
+  - command: "set floating"
+    match_process_name: "Godot"
+
 binding_modes:
   - name: "resize"
     keybindings:
       # Resize focused window by a percentage or pixel amount.
       - command: "resize width -2%"
-        bindings: ["J", "Left"]
+        bindings: ["H", "Left"]
       - command: "resize width +2%"
-        bindings: ["OemSemicolon", "Right"]
+        bindings: ["L", "Right"]
       - command: "resize height +2%"
-        bindings: ["L", "Up"]
+        bindings: ["K", "Up"]
       - command: "resize height -2%"
-        bindings: ["K", "Down"]
+        bindings: ["J", "Down"]
       # Press enter/escape to return to default keybindings.
       - command: "binding mode none"
         bindings: ["Escape", "Enter"]
@@ -211,23 +214,23 @@ binding_modes:
 keybindings:
   # Shift focus in a given direction.
   - command: "focus left"
-    bindings: ["Alt+J", "Alt+Left"]
+    bindings: ["Alt+H", "Alt+Left"]
   - command: "focus right"
-    bindings: ["Alt+OemSemicolon", "Alt+Right"]
+    bindings: ["Alt+L", "Alt+Right"]
   - command: "focus up"
-    bindings: ["Alt+L", "Alt+Up"]
+    bindings: ["Alt+K", "Alt+Up"]
   - command: "focus down"
-    bindings: ["Alt+K", "Alt+Down"]
+    bindings: ["Alt+J", "Alt+Down"]
 
   # Move focused window in a given direction.
   - command: "move left"
-    bindings: ["Alt+Shift+J", "Alt+Shift+Left"]
+    bindings: ["Alt+Shift+H", "Alt+Shift+Left"]
   - command: "move right"
-    bindings: ["Alt+Shift+OemSemicolon", "Alt+Shift+Right"]
+    bindings: ["Alt+Shift+L", "Alt+Shift+Right"]
   - command: "move up"
-    bindings: ["Alt+Shift+L", "Alt+Shift+Up"]
+    bindings: ["Alt+Shift+K", "Alt+Shift+Up"]
   - command: "move down"
-    bindings: ["Alt+Shift+K", "Alt+Shift+Down"]
+    bindings: ["Alt+Shift+J", "Alt+Shift+Down"]
 
   # Resize focused window by a percentage or pixel amount.
   - command: "resize width -2%"
@@ -279,7 +282,7 @@ keybindings:
   # Launch CMD terminal (alternatively `exec wt` or `exec %ProgramFiles%/Git/git-bash.exe`
   # to start Windows Terminal and Git Bash respectively.
   - command: "exec wt"
-    binding: "Alt+Enter"
+    binding: "Ctrl+Alt+T"
 
   # Focus the workspace that last had focus.
   - command: "focus workspace recent"
