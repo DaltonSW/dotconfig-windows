@@ -1,0 +1,153 @@
+#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+version = 2
+final_space = true
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'path'
+    style = 'plain'
+    foreground = 'p:orange'
+    template = '  {{ path .Path .Location }} '
+
+    [blocks.segments.properties]
+      style = 'full'
+
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+  overflow = 'break'
+
+  [[blocks.segments]]
+    type = 'git'
+    style = 'plain'
+    background = 'transparent'
+    foreground = 'p:green'
+    template = """( \
+    {{ .HEAD }}\
+    {{if or .Working.Changed .Staging.Changed }}{{ end }}\
+    {{ if and (gt .Ahead 0) (gt .Behind 0)}}{{ else }}{{ .BranchStatus }}{{ end }} \
+     )"""
+
+    [blocks.segments.properties]
+      branch_max_length = 25
+      fetch_status = true
+      branch_icon = ""
+      branch_identical_icon = ""
+      branch_ahead_icon = ""
+      branch_behind_icon = ""
+      branch_gone_icon = "󰼈"
+
+  [[blocks.segments]]
+    type = 'node'
+    style = 'plain'
+    foreground = 'p:green'
+    background = 'transparent'
+    template = ' '
+
+    [blocks.segments.properties]
+      display_mode = 'files'
+      fetch_package_manager = false
+      home_enabled = false
+
+  [[blocks.segments]]
+    type = 'go'
+    style = 'plain'
+    foreground = 'p:blue'
+    background = 'transparent'
+    template = ' '
+
+    [blocks.segments.properties]
+      fetch_version = false
+
+  [[blocks.segments]]
+    type = 'python'
+    style = 'plain'
+    foreground = 'p:yellow'
+    background = 'transparent'
+    template = ' '
+
+    [blocks.segments.properties]
+      display_mode = 'files'
+      fetch_version = false
+      fetch_virtual_env = false
+
+[[blocks]]
+  type = 'prompt'
+  newline = true
+  alignment = "left"
+
+  [[blocks.segments]]
+    type = 'root'
+    style = 'plain'
+    foreground = 'p:red'
+    template = '󱦛'
+
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    foreground_templates = [
+      "{{ if .Root }}p:red{{ else }}p:pink{{ end }}"
+    ]
+    background = 'transparent'
+    template = '{{ if .Root }}${{ else }}❯{{ end }}'
+
+[[tooltips]]
+  type = 'owm'
+  tips = ['owm',
+  'weather',
+  'temp']
+  style = 'diamond'
+  foreground = 'p:white'
+  background = 'p:orange'
+  leading_diamond = ''
+  trailing_diamond = ''
+  template = ' {{.Weather}} ({{.Temperature}}{{.UnitIcon}}) '
+
+  [tooltips.properties]
+    api_key = "42ce10f175aca6200f7f22e0e3c58f36"
+    location = "Madison,WI,US"
+    units = 'imperial'
+    http_timeout = 500
+    cache_timeout = 10
+
+[[tooltips]]
+  type = 'time'
+  tips = ['info']
+  style = 'plain'
+  foreground = 'p:white'
+  template = ' {{.CurrentDate}} '
+
+[[tooltips]]
+  type = 'text'
+  tips = ['info']
+  style = 'plain'
+  foreground = 'p:white'
+  template = ' Neat '
+
+[transient_prompt]
+  foreground = 'p:black'
+  background = 'transparent'
+  template = '<p:yellow,transparent></><,p:yellow> {{ .Folder }} </><p:yellow,transparent></> '
+
+[secondary_prompt]
+  foreground = 'p:black'
+  background = 'transparent'
+  template = '<p:yellow,transparent></><,p:yellow> > </><p:yellow,transparent></> '
+
+[palette]
+  black = '#262B44'
+  blue = '#8BE9FD'
+  green = '#50FA7B'
+  orange = '#FFB86C'
+  red = '#FF5555'
+  white = '#F8F8F2'
+  yellow = '#F1FA8C'
+  purple = '#BD93F9'
+  pink = '#FF79C6'
