@@ -113,7 +113,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   template = ' {{.Weather}} ({{.Temperature}}{{.UnitIcon}}) '
 
   [tooltips.properties]
-    # api_key = "42ce10f175aca6200f7f22e0e3c58f36"
     location = "Madison,WI,US"
     units = 'imperial'
     http_timeout = 500
