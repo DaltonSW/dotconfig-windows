@@ -6,72 +6,74 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
 [[blocks]]
   type = 'prompt'
-  alignment = 'left'
   newline = true
+  alignment = 'left'
 
   [[blocks.segments]]
     type = 'path'
     style = 'plain'
-    foreground = 'p:orange'
-    template = '  {{ path .Path .Location }} '
+    foreground = 'p:green'
+    template = ' {{ path .Path .Location }} '
 
     [blocks.segments.properties]
       style = 'full'
-
-
-[[blocks]]
-  type = 'prompt'
-  alignment = 'right'
-  overflow = 'break'
 
   [[blocks.segments]]
     type = 'git'
     style = 'plain'
     background = 'transparent'
-    foreground = 'p:green'
-    template = """( \
-    {{ .HEAD }}\
-    {{if or .Working.Changed .Staging.Changed }}{{ end }}\
-    {{ if and (gt .Ahead 0) (gt .Behind 0)}}{{ else }}{{ .BranchStatus }}{{ end }} \
-     )"""
+    foreground = 'p:greyblue'
+    template = """\
+    {{ if .HEAD }}\
+      {{ .HEAD }}\
+      {{if or .Working.Changed .Staging.Changed }}{{ end }} \
+      {{ if gt .Ahead 0 }}{{ .Ahead }} {{ end }}{{ if gt .Behind 0 }}{{ .Behind }} {{ end }}\
+      (󰳏 {{ if .UpstreamURL }}{{ url .RepoName .UpstreamURL }}{{ else }}󰼈{{ end }}) \
+    {{ else }}\
+      (󰳏 󰼈) \
+    {{ end }}\
+    """
 
     [blocks.segments.properties]
       branch_max_length = 25
       fetch_status = true
+      fetch_upstream_icon = true
       branch_icon = ""
-      branch_identical_icon = ""
-      branch_ahead_icon = ""
-      branch_behind_icon = ""
+      branch_identical_icon = ""
+      branch_ahead_icon = "󱞾"
+      branch_behind_icon = "󱞤"
       branch_gone_icon = "󰼈"
-
-  [[blocks.segments]]
-    type = 'node'
-    style = 'plain'
-    foreground = 'p:green'
-    background = 'transparent'
-    template = ' '
-
-    [blocks.segments.properties]
-      display_mode = 'files'
-      fetch_package_manager = false
-      home_enabled = false
-
-  [[blocks.segments]]
+      ignore_status = [
+        "qmk_firmware"
+      ]
+  
+[[blocks.segments]]
     type = 'go'
     style = 'plain'
-    foreground = 'p:blue'
+    foreground = 'p:cyan'
     background = 'transparent'
-    template = ' '
+    template = " "
 
-    [blocks.segments.properties]
-      fetch_version = false
+  [[blocks.segments]]
+    type = 'dotnet'
+    style = 'plain'
+    foreground = 'p:purple'
+    background = 'transparent'
+    template = "󰪮 "
+
+  [[blocks.segments]]
+    type = 'rust'
+    style = 'plain'
+    foreground = 'p:orange'
+    background = 'transparent'
+    template = "󱘗 "
 
   [[blocks.segments]]
     type = 'python'
     style = 'plain'
     foreground = 'p:yellow'
     background = 'transparent'
-    template = ' '
+    template = ' '
 
     [blocks.segments.properties]
       display_mode = 'files'
@@ -103,15 +105,15 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   tips = ['owm',
   'weather',
   'temp']
-  style = 'diamond'
-  foreground = 'p:white'
-  background = 'p:orange'
+  style = 'plain'
+  foreground = 'p:orange'
+  background = 'transparent'
   leading_diamond = ''
   trailing_diamond = ''
   template = ' {{.Weather}} ({{.Temperature}}{{.UnitIcon}}) '
 
   [tooltips.properties]
-    api_key = "42ce10f175aca6200f7f22e0e3c58f36"
+    # api_key = "42ce10f175aca6200f7f22e0e3c58f36"
     location = "Madison,WI,US"
     units = 'imperial'
     http_timeout = 500
@@ -119,17 +121,13 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
 [[tooltips]]
   type = 'time'
-  tips = ['info']
+  tips = ['date', 'time']
   style = 'plain'
-  foreground = 'p:white'
-  template = ' {{.CurrentDate}} '
+  foreground = 'p:red'
+  template = ' {{ .CurrentDate | date .Format }} '
 
-[[tooltips]]
-  type = 'text'
-  tips = ['info']
-  style = 'plain'
-  foreground = 'p:white'
-  template = ' Neat '
+  [tooltips.properties]
+    time_format = "Jan 2, 06 - 03:04 PM"
 
 [transient_prompt]
   foreground = 'p:black'
@@ -143,7 +141,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
 [palette]
   black = '#262B44'
-  blue = '#8BE9FD'
+  cyan = '#8BE9FD'
   green = '#50FA7B'
   orange = '#FFB86C'
   red = '#FF5555'
@@ -151,3 +149,4 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   yellow = '#F1FA8C'
   purple = '#BD93F9'
   pink = '#FF79C6'
+  greyblue = "#6272A4"
